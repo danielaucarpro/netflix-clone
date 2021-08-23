@@ -1,0 +1,48 @@
+.register-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: .8rem 2rem;
+}
+
+.logo{
+    list-style: none;
+    text-decoration: none;
+}
+
+
+.register-main{
+    display: flex;
+    flex-direction: column;
+    padding: 4rem;
+    height: 30rem;
+    width: 25rem;
+    margin: auto;
+    margin-top: 2rem;
+    margin: auto;
+    justify-content: start;
+}
+
+.register-title{
+    font-weight: bold;
+    font-size: 1.8rem;
+    margin: .2rem;
+    display: flex;
+}
+
+.register-password{
+    color: gray;
+    margin: 1rem 0rem;
+    height: 2.5rem;
+    padding: .5rem;
+}
+
+.forgotPassword{
+    color: rgb(0, 140, 255);
+    cursor: pointer;
+}
+
+.register-next-btn{
+    width: 100%;
+    padding: 1rem;
+}

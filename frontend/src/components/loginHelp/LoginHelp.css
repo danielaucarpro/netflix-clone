@@ -1,0 +1,51 @@
+.loginHelp-form{
+    margin: auto;
+    padding: 2rem;
+    height: 30rem;
+    width: 25rem;
+    background-color: whitesmoke;
+    text-align: center;
+
+}
+
+.loginHelp-title{
+    font-weight: normal;
+    font-size: 2rem;
+}
+
+.loginHelp-p{
+    font-size: 1.1rem;
+    text-align: start;
+}
+
+.loginHelp-radio{
+    display: flex;
+    align-items: center;
+    margin: 1rem 1.5rem;
+}
+
+.radio-input{
+    height: 2.1rem;
+    width: 2.1rem;
+}
+
+.loginHelp-password{
+    width: 90%;
+    padding: 1rem;
+    font-size: 1rem;
+    color: gray;
+}
+
+.emailMe{
+    margin: 1rem 0rem;
+    width: 100%;
+    padding: 1rem;
+}
+
+.logingHelp-link{
+    display: flex;
+    color: rgb(0, 153, 255);
+    text-decoration: underline;
+    text-align: start;
+    cursor: pointer;
+}
