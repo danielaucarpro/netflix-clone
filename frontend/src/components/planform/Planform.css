@@ -1,0 +1,63 @@
+.planform-main{
+    padding-bottom: 1rem;
+}
+
+.planform-textContainer{
+    margin: 2.5rem 10rem;
+}
+
+.plan-form{
+    margin: 2.5rem 10rem;
+}
+
+.planform-plan-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    border-bottom: 1px solid lightgray;
+}
+
+.basic-container{
+    display: block;
+    text-align: center;
+    background-color: red;
+    color: white;
+    text-align: center;
+    align-items: center;
+    padding: 1rem;
+    border-radius: .2rem;
+    height: 3rem;
+    width: 4rem;
+    margin-bottom: 1rem;
+}
+
+.planform-label{
+    display: flex;
+    background-color: red;
+    color: white;
+    text-align: center;
+    align-items: center;
+    padding: 1rem;
+    border-radius: .2rem;
+    height: 3rem;
+    width: 4rem;
+}
+
+.plan-data{
+    margin: 0rem 1rem;
+    text-align: center;
+}
+
+.data{
+    font-weight: bold;
+    color: gray;
+}
+
+.planform-radio{
+    height: 2rem;
+    width: 2rem;
+}
+
+.nextPlanform{
+    width: 20rem;
+}

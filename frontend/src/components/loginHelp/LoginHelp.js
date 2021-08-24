@@ -1,17 +1,12 @@
 import './LoginHelp.css';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+
+import Header from '../header/Header';
 
 const LoginHelp = () => {
     return (
         <>
-            <header className='register-header'>
-                <Link to='/'>
-                    <h1 className='logo'>Title</h1>
-                </Link>
-                <Link to='/login'>
-                    <button>Sign In</button>
-                </Link>
-            </header>
+        <Header></Header>
             <main>
                 <form className='loginHelp-form'>
                     <h2 className='loginHelp-title'>Forgot Email/Password</h2>

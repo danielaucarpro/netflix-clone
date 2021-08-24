@@ -1,17 +1,11 @@
-.register-header{
+.register-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: .8rem 2rem;
 }
 
-.logo{
-    list-style: none;
-    text-decoration: none;
-}
-
-
-.register-main{
+.register-main {
     display: flex;
     flex-direction: column;
     padding: 4rem;
@@ -23,26 +17,47 @@
     justify-content: start;
 }
 
-.register-title{
+.register-step {
+    font-weight: 300;
+    font-size: .9rem;
+}
+
+.register-stepNum {
+    font-weight: bold;
+}
+
+.register-title {
     font-weight: bold;
     font-size: 1.8rem;
     margin: .2rem;
     display: flex;
 }
 
-.register-password{
+.register-input {
     color: gray;
     margin: 1rem 0rem;
     height: 2.5rem;
     padding: .5rem;
 }
 
-.forgotPassword{
+.forgotPassword {
     color: rgb(0, 140, 255);
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.register-next-btn {
+    margin: 1rem 0rem;
+    width: 100%;
+    padding: 1rem;
+    border: none;
+    border-radius: .2rem;
+    color: white;
+    background-color: red;
+    font-size: 1rem;
     cursor: pointer;
 }
 
-.register-next-btn{
-    width: 100%;
-    padding: 1rem;
+.register-next-btn:hover{
+    background-color: rgb(250, 48, 48);
 }

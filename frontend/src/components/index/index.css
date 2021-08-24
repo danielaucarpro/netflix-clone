@@ -1,38 +1,34 @@
-.navbar-nav{
-    padding: 1rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .navbar–singInbtn{
-    padding: .4rem .6rem;
-    width: 5rem;
-    border: none;
-    border-radius: .2rem;
-    background-color: red;
-    color: white;
-    font-size: 1rem;
-  }
-  
-  .main-container{
-    margin: 10rem 25rem;
-    text-align: center;
-  }
+.navbar-nav {
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
-  .index-main-h1{
-    font-size: 3rem;
-  }
+.main-container {
+  margin: 10rem 25rem;
+  text-align: center;
+}
 
-  .index-main-h2{
-    margin: .2rem .2rem;
-    font-weight: 500;
-  }
+.index-main-h1 {
+  font-size: 3rem;
+}
 
-  .index-main-h4{
-    font-weight: normal;
-  }
+.index-main-h2 {
+  margin: .2rem .2rem;
+  font-weight: 500;
+}
 
-  .index-email-container{
-    background-color: white;
-  }
+.index-main-h4 {
+  font-weight: normal;
+}
+
+.index-getStartedBtn {
+  padding: 1rem;
+  width: 10rem;
+  border: none;
+  border-radius: .2rem;
+  background-color: red;
+  color: white;
+  font-size: 1rem;
+}
