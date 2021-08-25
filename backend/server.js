@@ -1,12 +1,54 @@
 const express = require('express');
+const mongo = require('mongodb');
+const mongoClient = require('mongodb').MongoClient;
 const basicAuth = require('express-basic-auth');
 var cors = require('cors');
 
+const url = "mongodb://localhost:27017/";
 
 const app = express();
 
 app.use(cors());
 app.use(express.json);
+
+//connecting with database
+mongoClient.connect(url, (err, db) => {
+    if (err) throw err;
+    console.log('Database is connect!')
+    db.close();
+    console.log('Database is now closed!')
+});
+
+//creating a collection -movies
+mongoClient.connect(url, function (err, db) {
+    if (err) throw err;
+    var movieDb = db.db("myMovieDb");
+    movieDb.createCollection("movies", function (err, res) {
+        if (err) throw err;
+        console.log("Collection created!");
+        db.close();
+    });
+});
+//users
+mongoClient.connect(url, function (err, db) {
+    if (err) console.log(err);
+    var usersDb = db.db("myMovieDb");
+    usersDb.createCollection("users", function (err, res) {
+        if (err) throw err;
+        console.log("Collection created!");
+        db.close();
+    });
+});
+//banned users
+mongoClient.connect(url, function (err, db) {
+    if (err) console.log(err);
+    var bannedUserDb = db.db("myMovieDb");
+    bannedUserDb.createCollection("bannedUsers", function (err, res) {
+        if (err) throw err;
+        console.log("Collection created!");
+        db.close();
+    });
+});
 
 //first value is alway userName and second value is the password
 app.use(basicAuth({
@@ -18,11 +60,11 @@ app.use(basicAuth({
     authorizer: (userName, password) => {
         let _userName = 'admin';
         let _password = 'password';
-        
+
         const userMatches = basicAuth.safeCompare(userName, _userName);
         const passwordMatches = basicAuth.safeCompare(password, _password);
 
-        if(userMatches && passwordMatches){
+        if (userMatches && passwordMatches) {
             return userMatches & passwordMatches;
         }
     }
