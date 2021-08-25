@@ -32,7 +32,7 @@ mongoClient.connect(url, function (err, db) {
 //users
 mongoClient.connect(url, function (err, db) {
     if (err) console.log(err);
-    var usersDb = db.db("myMovieDb");
+    var usersDb = db.db("user");
     usersDb.createCollection("users", function (err, res) {
         if (err) throw err;
         console.log("Collection created!");
