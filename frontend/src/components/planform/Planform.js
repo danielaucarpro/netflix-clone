@@ -8,8 +8,6 @@ import Header from '../header/Header';
 
 const Planform = () => {
 
-    fetch( )
-
     return (
         <>
             <Header></Header>
@@ -74,7 +72,7 @@ const Planform = () => {
                     </div>
                     <Link to='/planform'>
                         <center>
-                            <button className='register-next-btn nextPlanform'>Start Watching</button>
+                            <button className='register-next-btn nextPlanform' type='submit'>Start Watching</button>
                         </center>
                     </Link>
                 </form>
