@@ -30,15 +30,15 @@ mongoClient.connect(url, function (err, db) {
     });
 });
 //users
-mongoClient.connect(url, function (err, db) {
-    if (err) console.log(err);
-    var usersDb = db.db("user");
-    usersDb.createCollection("users", function (err, res) {
-        if (err) throw err;
-        console.log("Collection created!");
-        db.close();
-    });
-});
+// mongoClient.connect(url, function (err, db) {
+//     if (err) console.log(err);
+//     var usersDb = db.db("user");
+//     usersDb.createCollection("users", function (err, res) {
+//         if (err) throw err;
+//         console.log("Collection created!");
+//         db.close();
+//     });
+// });
 //banned users
 mongoClient.connect(url, function (err, db) {
     if (err) console.log(err);
@@ -95,6 +95,58 @@ app.get('/testNames', (req, res, next) => {
     // console.log(req);
     res.send({ 'admin': 'password' });
 });
+
+app.get('/registerUser', (req, res) => {
+    let email = 'daniel@email.com';
+    let user = 'daniel';
+    let password = 'daniel123';
+
+    registerUser(email, user, password);
+
+})
+
+const registerUser = (email = undefined, user = undefined, password = undefined) => {
+    mongoClient.connect(url, function (err, db) {
+        if (err) console.log(err);
+        var usersDb = db.db("user");
+        usersDb.createCollection("users", function (err, res) {
+            if (err) throw err;
+            console.log("Collection created!");
+        });
+
+        let myObj = { email: email, userName: user, password: password };
+        usersDb.collection('users').insertOne(myObj, (err, res) => {
+            if (err) console.log(err);
+            else {
+                console.log('Resgister one user!');
+            }
+        })
+
+        db.close();
+    });
+}
+
+//use find
+const loginUser = (email = undefined, user = undefined, password = undefined) => {
+    mongoClient.connect(url, function (err, db) {
+        if (err) console.log(err);
+        var usersDb = db.db("user");
+        usersDb.createCollection("users", function (err, res) {
+            if (err) throw err;
+            console.log("Collection created!");
+        });
+
+        let myObj = { email: email, userName: user, password: password };
+        usersDb.collection('users').insertOne(myObj, (err, res) => {
+            if (err) console.log(err);
+            else {
+                console.log('Resgister one user!');
+            }
+        })
+
+        db.close();
+    });
+}
 
 //multiple routes do GET data and send to frontend
 
