@@ -13,6 +13,10 @@ const Header = () => {
                     <Link to='/login'>
                         <button className='navbar–singInbtn'>Sing In</button>
                     </Link>
+                    <Link to='/unsubscribe'>
+                        {/* Delete account button only for debug */}
+                        <button className='navbar–singInbtn'>Delete Account</button>
+                    </Link>
                 </nav>
             </header>
         </>

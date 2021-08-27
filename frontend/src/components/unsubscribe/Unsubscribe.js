@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
-import './Login.css'
 
-const Login = () => {
+const Unsubscribe = () => {
 
     const showPassword = (event) => {
         event.target.type = 'text'
@@ -16,7 +15,7 @@ const Login = () => {
             </header>
             <main>
                 <form className='login-form'>
-                    <h1 className='login-h1' >Sign In</h1>
+                    <h1 className='login-h1' >Sorry to see you go,</h1>
                     <div className='login-input-container'>
                         <label className='login-label' >Email or phone number</label>
                         <br></br>
@@ -28,22 +27,11 @@ const Login = () => {
                         <input id='password' className='login-input' type='password' />
                         {/* <span className='login-showBtn' onClick={showPassword} >SHOW</span> */}
                     </div>
-                    <button className='login-signBtn' type='submit'>Sign In</button>
-                    <div className='login-checkbox-container'>
-                        <div className='login-rememberMe'>
-                            <input className='login-checkbox' type='checkbox'></input>
-                            <label>Remember me</label>
-                        </div>
-                        <span>Need help?</span>
-                    </div>
-                    <div className='login-newHere'>
-                        <p className='login-newhere-text'>New here?</p>
-                        <span className='signUp-span'>Sign up now</span>
-                    </div>
+                    <button className='login-signBtn' type='submit'>Delete Account</button>
                 </form>
             </main>
         </>
     );
 }
 
-export default Login;
+export default Unsubscribe;

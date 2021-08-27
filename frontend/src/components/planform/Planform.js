@@ -72,7 +72,7 @@ const Planform = () => {
                     </div>
                     <Link to='/planform'>
                         <center>
-                            <button className='register-next-btn nextPlanform' type='submit'>Start Watching</button>
+                            <button className='register-next-btn nextPlanform' type='submitçç'>Start Watching</button>
                         </center>
                     </Link>
                 </form>
