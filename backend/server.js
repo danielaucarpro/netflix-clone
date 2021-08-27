@@ -1,7 +1,11 @@
+//importing core modules
 const express = require('express');
+//mongo db
 const mongo = require('mongodb');
 const mongoClient = require('mongodb').MongoClient;
+//basic auth
 const basicAuth = require('express-basic-auth');
+//cors
 var cors = require('cors');
 
 const url = "mongodb://localhost:27017/";
@@ -29,16 +33,6 @@ mongoClient.connect(url, function (err, db) {
         db.close();
     });
 });
-//users
-// mongoClient.connect(url, function (err, db) {
-//     if (err) console.log(err);
-//     var usersDb = db.db("user");
-//     usersDb.createCollection("users", function (err, res) {
-//         if (err) throw err;
-//         console.log("Collection created!");
-//         db.close();
-//     });
-// });
 //banned users
 mongoClient.connect(url, function (err, db) {
     if (err) console.log(err);
@@ -50,25 +44,9 @@ mongoClient.connect(url, function (err, db) {
     });
 });
 
-//first value is alway userName and second value is the password
-app.use(basicAuth({
-    users: { 'admin': 'password' }, // this is doing htttp//:admin:password@localhost:4000
-    authorizeAsync: true,
-    unauthorizedResponse: () => {
-        return "ERROR! Check your user name and your password.";
-    },
-    authorizer: (userName, password) => {
-        let _userName = 'admin';
-        let _password = 'password';
+//multiple routes do GET data and send to frontend
 
-        const userMatches = basicAuth.safeCompare(userName, _userName);
-        const passwordMatches = basicAuth.safeCompare(password, _password);
-
-        if (userMatches && passwordMatches) {
-            return userMatches & passwordMatches;
-        }
-    }
-}))
+//CRUD = create, read, update and delete
 
 app.get('/', (req, res, next) => {
     res.send('Autorized');
@@ -76,9 +54,36 @@ app.get('/', (req, res, next) => {
 
 //basic auth
 app.put('/login', (req, res, next) => {
-    console.log(req);
-    res.send('You put some login info' + req.body);
+    // console.log(req);
+    let email = 'daniel@email.com';
+    let password = 'daniel123';
+    login(email, password);
 });
+
+//first value is alway userName and second value is the password
+const login = (email, password) => {
+    app.use(basicAuth(email, password)({
+        admin: { 'admin': 'password' }, // this is doing htttp//:admin:password@localhost:4000
+        newUser: { email: password },
+        authorizeAsync: true,
+        unauthorizedResponse: () => {
+            return "ERROR! Check your user name and your password.";
+        },
+        authorizer: (email, password) => {
+            let _userName = email;
+            let _password = password;
+
+            /*just checking with dummy variables, if basic auth is working
+            later will have to chenge to use the params in this authorizer function*/
+            const userMatches = basicAuth.safeCompare(email, _userName);
+            const passwordMatches = basicAuth.safeCompare(password, _password);
+
+            if (userMatches && passwordMatches) {
+                return userMatches & passwordMatches;
+            }
+        }
+    }))
+}
 
 //invalid a login user
 app.put('/logout', (req, res, next) => {
@@ -91,21 +96,21 @@ app.put('/planform', (req, res, next) => {
     res.send('Ok');
 });
 
-app.get('/testNames', (req, res, next) => {
-    // console.log(req);
-    res.send({ 'admin': 'password' });
-});
-
-app.get('/registerUser', (req, res) => {
+//SING UP A NEW USER PAGE
+app.get('/register', (req, res) => {
+    /*dummy test to test the code
+    change for real dat, getting from the req param*/
     let email = 'daniel@email.com';
-    let user = 'daniel';
     let password = 'daniel123';
+    let plan = 'premium';
+    let creditCard = '1234 1234 1234 1234';
 
-    registerUser(email, user, password);
+    registerUser(email, password, plan, creditCard);
 
 })
 
-const registerUser = (email = undefined, user = undefined, password = undefined) => {
+//registring new users from my site.
+const registerUser = (email = undefined, password = undefined, plan = undefined, creditCard = undefined) => {
     mongoClient.connect(url, function (err, db) {
         if (err) console.log(err);
         var usersDb = db.db("user");
@@ -114,8 +119,8 @@ const registerUser = (email = undefined, user = undefined, password = undefined)
             console.log("Collection created!");
         });
 
-        let myObj = { email: email, userName: user, password: password };
-        usersDb.collection('users').insertOne(myObj, (err, res) => {
+        let myNewUser = { email: email, userName: email, password: password, plan: plan, payMethod: creditCard };
+        usersDb.collection('users').insertOne(myNewUser, (err, res) => {
             if (err) console.log(err);
             else {
                 console.log('Resgister one user!');
@@ -126,31 +131,49 @@ const registerUser = (email = undefined, user = undefined, password = undefined)
     });
 }
 
-//use find
-const loginUser = (email = undefined, user = undefined, password = undefined) => {
+//FORGOT PASSWORD PAGE
+app.get('/loginHelp', (req, res, next) => {
+    // console.log(req);
+    /*dummy test to test the code
+    change for real dat, getting from the req param*/
+    let email = 'daniel@email.com';
+    loginHelp(email);
+});
+
+//finding users in my database, useful for forgot password.
+const loginHelp = (email = undefined) => {
     mongoClient.connect(url, function (err, db) {
         if (err) console.log(err);
         var usersDb = db.db("user");
-        usersDb.createCollection("users", function (err, res) {
-            if (err) throw err;
-            console.log("Collection created!");
-        });
-
-        let myObj = { email: email, userName: user, password: password };
-        usersDb.collection('users').insertOne(myObj, (err, res) => {
+        usersDb.collection('users').findOne({ email }, (err, result) => {
             if (err) console.log(err);
-            else {
-                console.log('Resgister one user!');
-            }
+            //returning result for now, later I need to make the reset password steps.
+            // return result
+            //send email
+            //send res with old and new password, and code to valid
+
+            //updating the password.
+            updatePassword(oldPassword, newPassword);
         })
 
         db.close();
     });
 }
 
-//multiple routes do GET data and send to frontend
-
-//CRUD = create, read, update and delete
+//update password
+const updatePassword = (oldPassword, newPassword) => {
+    mongoClient.connect(url, function (err, db, oldPassword, newPassword) {
+        if (err) console.log(err);
+        var userDB = db.db("users");
+        var myquery = { password: oldPassword };
+        var newvalues = { $set: { password: newPassword } };
+        userDB.collection("users").updateOne(myquery, newvalues, function (err, res) {
+            if (err) console.log(err);
+            console.log("Password updated!");
+            db.close();
+        });
+    });
+}
 
 const port = 4000;
 app.listen(port);
