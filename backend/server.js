@@ -86,9 +86,25 @@ const login = (email, password) => {
 }
 
 //invalid a login user
-app.put('/logout', (req, res, next) => {
+app.put('/unsubscribe', (req, res, next) => {
     res.send('Ok');
 });
+
+//deleting user
+const unsubscribe = (email, password) => {
+    mongoClient.connect(url, function(err, db) {
+        if (err) throw err;
+        var dbo = db.db("users");
+        var myquery = { email: email, password: password };
+        //check if the info match
+        login(myquery.email, myquery.password);
+        dbo.collection("users").deleteOne(myquery, function(err, obj) {
+          if (err) throw err;
+          console.log("User deleted!");
+          db.close();
+        });
+      });
+}
 
 //here the req will have some data
 app.put('/planform', (req, res, next) => {
@@ -140,7 +156,7 @@ app.get('/loginHelp', (req, res, next) => {
     loginHelp(email);
 });
 
-//finding users in my database, useful for forgot password.
+//finding users so we can change password later
 const loginHelp = (email = undefined) => {
     mongoClient.connect(url, function (err, db) {
         if (err) console.log(err);
@@ -160,7 +176,7 @@ const loginHelp = (email = undefined) => {
     });
 }
 
-//update password
+//updating password
 const updatePassword = (oldPassword, newPassword) => {
     mongoClient.connect(url, function (err, db, oldPassword, newPassword) {
         if (err) console.log(err);
